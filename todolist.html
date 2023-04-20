@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do List</title>
+    <style>
+        body{
+            height: 100vh;
+            background: url(marshmello_1080x.jpg) no-repeat center center/cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+        #add-task-container{
+            width: 350px;
+            padding: 20px 10px;
+            background: white;
+            border-radius: 20px;
+            box-shadow:  0 0 3px;
+            margin-bottom: 20px;
+            display: flex;
+
+        }
+        input{
+            flex: 5;
+            margin-right: 10px;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            padding: 5px;
+        }
+        #add-task{
+            flex: 1;
+            transition: .3s;
+            font-size: 1.2rem;
+            padding: 5px;
+            background-color: white;
+            color: green;
+
+            border: green solid 2px;
+            border-radius: 10px;
+
+        }
+        #add-task:hover{
+            background-color: green;
+            color: white;
+        }
+
+
+        /* styling for task to be added */
+
+        .task{
+            width: 100%;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow:  0 0 3px;
+
+            padding: 5px;
+            margin-bottom: 5px;
+
+
+            display: flex;
+            justify-content: space-between;
+        }
+        .task li{
+            list-style: none;
+            flex: 4;
+            font-size: 1.2rem;
+            margin: 10px;
+        }
+
+        .task button{
+            flex: 1;
+            border-radius: 10px;
+            background-color: white;
+            cursor: pointer;
+
+        }
+        .task .checkTask{
+            color: orange;
+            margin-right: 5px;
+            border: solid 2px orange;
+            font-size: 1.5rem;
+        }
+        .task .checkTask:hover{
+            background-color: orange;
+            color: white;
+        }
+        .task .deleteTask{
+            color:  red;
+            margin-right: 5px;
+            border: solid 2px red;
+            font-size: 1.3rem;
+        }
+        .task .deleteTask:hover{
+            background-color: red;
+            color: white;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="add-task-container">
+            <input type="text" placeholder="Enter Task" id="input-task">
+            <button id="add-task">+</button>
+        </div>
+        <div id="task-container"></div>
+    </div>
+</body>
+<script>
+    const addTask = document.getElementById('add-task');
+    const taskContainer = document.getElementById('task-container');
+    const inputTask =  document.getElementById('input-task')
+
+
+    addTask.addEventListener('click',function(){
+
+        let task = document.createElement('div');
+        task.classList.add('task');
+
+        let li = document.createElement('li');
+
+        li.innerText = `${inputTask.value}`;
+        task.appendChild(li);
+
+        let checkButton =   document.createElement('button');
+        checkButton.innerHTML = 'check';
+        checkButton.classList.add('checkTask');
+        task.appendChild(checkButton);
+
+        let deleteButton = document.createElement('button');
+        deleteButton.innerHTML = 'delete';
+        deleteButton.classList.add('deleteTask');
+        task.appendChild(deleteButton);
+
+
+        if(inputTask.value === ``){
+            alert('Please Enter a Task');
+        }else{
+            taskContainer.appendChild(task);
+        }
+
+        inputTask.value = "";
+
+        checkButton.addEventListener('click', function(){
+            li.style.textDecoration = 'line-through';
+        });
+
+        deleteButton.addEventListener('click', function (e){
+
+            let target = e.target;
+
+            target.parentElement.remove();
+        })
+
+    })
+  
+
+</script>
+</html>
